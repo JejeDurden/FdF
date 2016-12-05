@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_get_y.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 11:37:20 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/12/05 20:10:37 by jdesmare         ###   ########.fr       */
+/*   Created: 2016/12/05 17:20:20 by jdesmare          #+#    #+#             */
+/*   Updated: 2016/12/05 19:23:06 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "./includes/fdf.h"
 
-# include <mlx.h>
-# include <math.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include <stdio.h>
-# include "../libft/libft.h"
-# include "../libft/get_next_line.h"
+int		ft_get_y(int fd)
+{
+	char	*line;
+	int		y;
 
-int			ft_fdf(char *file);
-int			**ft_reader(int **tab, int fd);
-int			ft_get_y(int fd);
-int			ft_display(int **nb);
-
-#endif
+	y = 0;
+	while (get_next_line(fd, &line))
+	{
+		y++;
+		free(line);
+	}
+	return (y);
+}

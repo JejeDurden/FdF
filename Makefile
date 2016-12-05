@@ -6,19 +6,23 @@
 #    By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/11 10:38:56 by jdesmare          #+#    #+#              #
-#*   Updated: 2016/12/02 13:56:19 by jdesmare         ###   ########.fr       *#
+#*   Updated: 2016/12/05 19:55:34 by jdesmare         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-CC = gcc $(FLAGS)
+CC = gcc -g $(FLAGS)
 
 FLAGS = -Wall -Werror -Wextra
 
 INCLUDES = ./includes/
 
 SRC =	main.c						\
+		ft_fdf.c					\
+		ft_reader.c					\
+		ft_get_y.c					\
+		ft_display.c				\
 
 OBJ = $(SRC:.c=.o)
 
@@ -27,11 +31,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C ./libft/
-	@$(CC) $(CFLAGS) -I$(INCLUDES) -c $(SRC)
-	@$(CC) -L./libft/ -lft $^ -o $@
+	@$(CC) -I$(INCLUDES) -c $(SRC)
+	@$(CC) -L./libft/ -lft $^ -o $@ -lmlx -framework OpenGL -framework Appkit
 	@echo "$(NAME) created successfully"
 
-$(OBJ)%.o: $(SRC)%.c
+$(OBJ): $(SRC)
 	@$(CC) -o $@ -c $<
 
 clean:

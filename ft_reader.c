@@ -6,33 +6,34 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 16:03:09 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/12/02 16:12:45 by jdesmare         ###   ########.fr       */
+/*   Updated: 2016/12/05 19:17:13 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-int		**ft_reader(int fd)
+int		**ft_reader(int **tab, int fd)
 {
-	int		**tab;
 	char	*line;
 	char	**line_split;
 	int		i;
 	int		j;
-	int		*coord;
 
 	i = 0;
-	j = 0;
 	while (get_next_line(fd, &line))
 	{
+		j = 0;
 		line_split = ft_strsplit(line, ' ');
-		while (line_split)
+		tab[i] = ft_memalloc(sizeof(int) * ft_countwords(line, ' '));
+		free(line);
+		while (line_split[j])
 		{
-			coord[j] = ft_atoi(line_split[j]);
+			tab[i][j] = ft_atoi(line_split[j]);
+			free(line_split[j]);
 			j++;
 		}
-		tab[i] = coord;
 		i++;
+		free(line_split);
 	}
 	return (tab);
 }
