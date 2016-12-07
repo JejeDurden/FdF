@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 11:37:20 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/12/05 20:10:37 by jdesmare         ###   ########.fr       */
+/*   Updated: 2016/12/07 07:47:09 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@
 int			ft_fdf(char *file);
 int			**ft_reader(int **tab, int fd);
 int			ft_get_y(int fd);
-int			ft_display(int **nb);
+int			ft_display(int **nb, int line, int col);
 
 #endif

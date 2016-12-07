@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 15:47:03 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/12/05 19:21:47 by jdesmare         ###   ########.fr       */
+/*   Updated: 2016/12/06 12:50:48 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int		ft_fdf(char *file)
 	int		**nb;
 	int		fd;
 	int		y;
+	int		x;
 
+	x = 0;
 	if ((fd = open(file, O_RDONLY)) == -1)
 	{
 		ft_putstr_fd("No data found.\n", 2);
@@ -33,7 +35,7 @@ int		ft_fdf(char *file)
 	}
 	nb = ft_memalloc(sizeof(int *) * y);
 	nb = ft_reader(nb, fd);
-	ft_display(nb);
+	ft_display(nb, y, x);
 	free(*nb);
 	return (1);
 }
