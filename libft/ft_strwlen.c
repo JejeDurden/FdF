@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*   ft_strwlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 14:57:37 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/11/09 10:52:39 by jdesmare         ###   ########.fr       */
+/*   Created: 2016/12/29 17:57:46 by jdesmare          #+#    #+#             */
+/*   Updated: 2017/01/01 13:22:53 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strnequ(char const *s1, char const *s2, size_t n)
+size_t	ft_strwlen(const wchar_t *s)
 {
-	if (!s1 || !s2)
+	int		i;
+
+	i = 0;
+	if (!s)
 		return (0);
-	if (ft_strncmp(s1, s2, n) == 0)
-		return (1);
-	return (0);
+	while (*s)
+	{
+		i += ft_char_size(*s);
+		s++;
+	}
+	return (i);
 }

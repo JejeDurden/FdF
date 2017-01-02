@@ -6,7 +6,7 @@
 /*   By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 11:40:04 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/11/26 15:17:16 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/01/01 14:26:25 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include <limits.h>
+# include <wchar.h>
+# include <locale.h>
 
 typedef struct		s_list
 {
@@ -25,8 +28,15 @@ typedef struct		s_list
 }					t_list;
 
 void				ft_putchar(char c);
+int					ft_char_size(int c);
+void				ft_putwchar(wchar_t c);
+void				ft_putnchar(char c, int nb);
 size_t				ft_strlen(const char *s);
+size_t				ft_strwlen(const wchar_t *s);
 void				ft_putstr(const char *s);
+void				ft_putwstr(const wchar_t *s);
+void				ft_putnstr(char *s, int n);
+void				ft_putnwstr(wchar_t *s, int n);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_isalpha(int c);
@@ -41,7 +51,10 @@ char				*ft_strcpy(char *dest, const char *src);
 char				*ft_strncpy(char *dest, const char *src, size_t n);
 char				*ft_strcat(char *dest, const char *src);
 char				*ft_strstr(const char *haystack, const char *needle);
-void				ft_putnbr(int n);
+void				ft_putnbr(long long int n);
+void				ft_putoct(unsigned long long int n);
+void				ft_putunbr(long long int n);
+void				ft_putlunbr(unsigned long long int n);
 int					ft_atoi(const char *nptr);
 char				*ft_strncat(char *dest, const char *src, size_t n);
 void				ft_bzero(void *s, int n);
@@ -90,5 +103,18 @@ int					ft_wordlen(const char *str, char c);
 void				ft_swap(int *a, int *b);
 char				*ft_strrev(char *str);
 int					ft_sqrt(int nb);
+void				ft_putnbr_base(long long int nb, int base);
+void				ft_putnbr_base_min(long long int nb, int base);
+char				*ft_strcdup(const char *s, char c);
+int					ft_count_nb(long long int nb);
+int					ft_count_lunb(unsigned long long int nb);
+void				ft_print_hex(unsigned long long int nb);
+void				ft_print_nhex(unsigned long long int nb, int i);
+void				ft_print_uhex(unsigned long long int nb);
+void				ft_print_uhex_maj(unsigned long long int nb);
+int					ft_longer_size(int n1, int n2);
+int					ft_smaller_size(int n1, int n2);
+int					ft_puthex_size(unsigned long long int nb);
+int					ft_putoct_size(unsigned long long int nb);
 
 #endif

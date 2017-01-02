@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*   ft_get_max.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 14:57:37 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/11/09 10:52:39 by jdesmare         ###   ########.fr       */
+/*   Created: 2016/12/05 17:20:20 by jdesmare          #+#    #+#             */
+/*   Updated: 2017/01/01 15:48:06 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./includes/fdf.h"
 
-int		ft_strnequ(char const *s1, char const *s2, size_t n)
+void		ft_get_max(int fd, t_info *map)
 {
-	if (!s1 || !s2)
-		return (0);
-	if (ft_strncmp(s1, s2, n) == 0)
-		return (1);
-	return (0);
+	char	*line;
+	int		y;
+
+	y = 0;
+	while (get_next_line(fd, &line))
+	{
+		y++;
+		map->max_x = ft_countwords(line, ' ');
+		free(line);
+	}
+	map->max_y = y;
 }

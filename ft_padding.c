@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_reader.c                                        :+:      :+:    :+:   */
+/*   ft_padding.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 16:03:09 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/02 16:46:58 by jdesmare         ###   ########.fr       */
+/*   Created: 2017/01/02 14:05:16 by jdesmare          #+#    #+#             */
+/*   Updated: 2017/01/02 19:10:12 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-int		**ft_reader( int **tab, int fd)
+void	ft_padding(t_info *map)
 {
-	char	*line;
-	char	**line_split;
-	int		i;
-	int		j;
+	int		size;
 
-	i = 0;
-	while (get_next_line(fd, &line))
-	{
-		j = 0;
-		line_split = ft_strsplit(line, ' ');
-		tab[i] = ft_memalloc(sizeof(int) * ft_countwords(line, ' '));
-		free(line);
-		while (line_split[j])
-		{
-			tab[i][j] = ft_atoi(line_split[j]);
-			free(line_split[j]);
-			j++;
-		}
-		i++;
-		free(line_split);
-	}
-	return (tab);
+	size = ft_longer_size(map->max_x, map->max_y);
+	if (size <= 20)
+		map->padding = 25;
+	else if (size >= 20 && size <= 50)
+		map->padding = 20;
+	else if (size >= 50 && size <= 100)
+		map->padding = 15;
+	else if (size >= 5 && size <= 200)
+		map->padding = 10;
+	else
+		map->padding = 3;
 }

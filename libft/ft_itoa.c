@@ -6,13 +6,13 @@
 /*   By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 18:23:30 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/11/10 16:55:14 by jdesmare         ###   ########.fr       */
+/*   Updated: 2016/12/13 12:25:58 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_count_nb(int nb)
+static int		count_nb(int nb)
 {
 	int				len;
 	unsigned int	n;
@@ -41,7 +41,7 @@ char			*ft_itoa(int n)
 	int				negative;
 	unsigned int	nb;
 
-	i = ft_count_nb(n) - 1;
+	i = count_nb(n) - 1;
 	if ((str = (char*)malloc(sizeof(char) * (i + 1))) == 0)
 		return (0);
 	negative = n;

@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_reader.c                                        :+:      :+:    :+:   */
+/*   ft_key_event.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 16:03:09 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/02 16:46:58 by jdesmare         ###   ########.fr       */
+/*   Created: 2017/01/02 18:05:38 by jdesmare          #+#    #+#             */
+/*   Updated: 2017/01/02 20:12:49 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-int		**ft_reader( int **tab, int fd)
+int		ft_key_event(int keycode, t_info *map)
 {
-	char	*line;
-	char	**line_split;
-	int		i;
-	int		j;
-
-	i = 0;
-	while (get_next_line(fd, &line))
-	{
-		j = 0;
-		line_split = ft_strsplit(line, ' ');
-		tab[i] = ft_memalloc(sizeof(int) * ft_countwords(line, ' '));
-		free(line);
-		while (line_split[j])
-		{
-			tab[i][j] = ft_atoi(line_split[j]);
-			free(line_split[j]);
-			j++;
-		}
-		i++;
-		free(line_split);
-	}
-	return (tab);
+	ft_putnbr(keycode);
+	ft_putchar('\n');
+	mlx_clear_window(map->mlx, map->window);
+	if (keycode == 53)
+		exit(0);
+	if (keycode == 11)
+		map->color = 0x0000FF;
+	if (keycode == 15)
+		map->color = 0xFF0000;
+	if (keycode == 5)
+		map->color = 0x00FF00;
+	if (keycode == 69)
+		map->zoom++;
+	if (keycode == 78)
+		map->zoom --;
+	ft_expose_hook(map);
+	return (1);
 }

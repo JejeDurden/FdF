@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*   ft_count_lunb.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 14:57:37 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/11/09 10:52:39 by jdesmare         ###   ########.fr       */
+/*   Created: 2016/12/29 14:01:51 by jdesmare          #+#    #+#             */
+/*   Updated: 2016/12/31 10:41:19 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strnequ(char const *s1, char const *s2, size_t n)
+int		ft_count_lunb(unsigned long long int nb)
 {
-	if (!s1 || !s2)
-		return (0);
-	if (ft_strncmp(s1, s2, n) == 0)
+	int			len;
+
+	len = 0;
+	if (nb == 0)
 		return (1);
-	return (0);
+	if ((long long int)nb < 0)
+		return (20);
+	while (nb > 0)
+	{
+		nb /= 10;
+		len++;
+	}
+	return (len);
 }

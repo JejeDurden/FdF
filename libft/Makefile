@@ -6,7 +6,7 @@
 #    By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/02 17:35:40 by jdesmare          #+#    #+#              #
-#*   Updated: 2016/12/02 13:23:09 by jdesmare         ###   ########.fr       *#
+#*   Updated: 2017/01/01 18:20:06 by jdesmare         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,17 @@ NAME = libft.a
 
 CC = gcc $(FLAGS)
 
-FLAG = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 SRC = ft_putchar.c			\
+	  ft_putwchar.c			\
+	  ft_putnchar.c			\
+	  ft_char_size.c		\
 	  ft_putstr.c			\
+	  ft_putwstr.c			\
+	  ft_putnwstr.c			\
 	  ft_strlen.c			\
+	  ft_strwlen.c			\
 	  ft_strcmp.c			\
 	  ft_strncmp.c			\
 	  ft_isalpha.c			\
@@ -34,6 +40,9 @@ SRC = ft_putchar.c			\
 	  ft_strcat.c			\
 	  ft_strstr.c			\
 	  ft_putnbr.c			\
+	  ft_putoct.c			\
+	  ft_putunbr.c			\
+	  ft_putlunbr.c			\
 	  ft_atoi.c				\
 	  ft_strncat.c			\
 	  ft_bzero.c			\
@@ -81,7 +90,21 @@ SRC = ft_putchar.c			\
 	  ft_swap.c				\
 	  ft_strrev.c			\
 	  ft_sqrt.c				\
-	  get_next_line.c	\
+	  get_next_line.c		\
+	  ft_putnbr_base.c		\
+	  ft_putnbr_base_min.c	\
+	  ft_strcdup.c			\
+	  ft_count_nb.c			\
+	  ft_count_lunb.c		\
+	  ft_print_hex.c		\
+	  ft_print_nhex.c		\
+	  ft_print_uhex.c		\
+	  ft_print_uhex_maj.c	\
+	  ft_putnstr.c			\
+	  ft_longer_size.c		\
+	  ft_smaller_size.c		\
+	  ft_puthex_size.c		\
+	  ft_putoct_size.c		\
 
 OBJ = $(SRC:.c=.o)
 
@@ -93,6 +116,9 @@ $(NAME):
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 	@echo "Done."
+
+%.o: %.c
+	@$(CC) -o $@ -c $<
 
 clean:
 	@echo "Erasing .o files ..."

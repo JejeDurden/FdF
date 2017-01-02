@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*   ft_putnwstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 14:57:37 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/11/09 10:52:39 by jdesmare         ###   ########.fr       */
+/*   Created: 2016/12/29 17:46:41 by jdesmare          #+#    #+#             */
+/*   Updated: 2017/01/01 13:40:38 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./libft.h"
 
-int		ft_strnequ(char const *s1, char const *s2, size_t n)
+void	ft_putnwstr(wchar_t *str, int n)
 {
-	if (!s1 || !s2)
-		return (0);
-	if (ft_strncmp(s1, s2, n) == 0)
-		return (1);
-	return (0);
+	int		i;
+
+	i = 0;
+	if (str && n != 0)
+	{
+		while (*str != '\0' && i < n)
+		{
+			ft_putwchar(*str);
+			i += ft_char_size(*str);
+			str++;
+		}
+	}
 }

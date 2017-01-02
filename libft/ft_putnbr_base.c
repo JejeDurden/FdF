@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 14:57:37 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/11/09 10:52:39 by jdesmare         ###   ########.fr       */
+/*   Created: 2016/12/13 08:22:54 by jdesmare          #+#    #+#             */
+/*   Updated: 2016/12/30 16:36:54 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strnequ(char const *s1, char const *s2, size_t n)
+void	ft_putnbr_base(long long int nb, int base)
 {
-	if (!s1 || !s2)
-		return (0);
-	if (ft_strncmp(s1, s2, n) == 0)
-		return (1);
-	return (0);
+	char	*str;
+
+	str = "0123456789ABCDEF";
+	if (base == 10)
+		ft_putnbr(nb);
+	else
+	{
+		if (nb < 0)
+		{
+			nb = -nb;
+		}
+		if (nb >= base)
+			ft_putnbr_base(nb / base, base);
+		ft_putchar(str[nb % base]);
+	}
 }

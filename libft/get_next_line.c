@@ -6,29 +6,11 @@
 /*   By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:24:39 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/11/29 18:37:21 by jdesmare         ###   ########.fr       */
+/*   Updated: 2016/12/13 08:37:57 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-static char		*ft_strcdup(char *s, char c)
-{
-	char		*dest;
-	size_t		i;
-
-	i = 0;
-	dest = (char *)malloc(sizeof(*dest) * (ft_strlen(s) + 1));
-	if (!dest)
-		return (NULL);
-	while (i < ft_strlen(s) && s[i] != c)
-	{
-		dest[i] = s[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
 
 static int		ft_return(char *readfile, char **line)
 {

@@ -6,26 +6,22 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 15:47:03 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/12/06 12:50:48 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/01/02 19:17:59 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-int		ft_fdf(char *file)
+int		ft_fdf(t_info *map, char *file)
 {
-	int		**nb;
 	int		fd;
-	int		y;
-	int		x;
 
-	x = 0;
 	if ((fd = open(file, O_RDONLY)) == -1)
 	{
 		ft_putstr_fd("No data found.\n", 2);
 		return (-1);
 	}
-	y = ft_get_y(fd);
+	ft_get_max(fd, map);
 	if (close(fd) == -1)
 		ft_putstr_fd("Close failed\n", 2);
 	if ((fd = open(file, O_RDONLY)) == -1)
@@ -33,9 +29,12 @@ int		ft_fdf(char *file)
 		ft_putstr_fd("No data found.\n", 2);
 		return (-1);
 	}
-	nb = ft_memalloc(sizeof(int *) * y);
-	nb = ft_reader(nb, fd);
-	ft_display(nb, y, x);
-	free(*nb);
+	map->tab = ft_memalloc(sizeof(int *) * map->max_y);
+	map->tab = ft_reader(map->tab, fd);
+	ft_padding(map);
+	ft_window_size(map);
+	map->color = 0x42adab;
+	ft_display(map);
+	free(map->tab);
 	return (1);
 }

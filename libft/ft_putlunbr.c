@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*   ft_putlunbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 14:57:37 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/11/09 10:52:39 by jdesmare         ###   ########.fr       */
+/*   Created: 2016/12/29 11:48:34 by jdesmare          #+#    #+#             */
+/*   Updated: 2016/12/29 19:29:14 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strnequ(char const *s1, char const *s2, size_t n)
+void	ft_putlunbr(unsigned long long int n)
 {
-	if (!s1 || !s2)
-		return (0);
-	if (ft_strncmp(s1, s2, n) == 0)
-		return (1);
-	return (0);
+	unsigned long long int		max;
+
+	max = ULONG_MAX;
+	if (n == max)
+		ft_putstr("18446744073709551615");
+	else if (n < max && n > 9)
+	{
+		ft_putlunbr(n / 10);
+		ft_putlunbr(n % 10);
+	}
+	else
+		ft_putchar(n + '0');
 }

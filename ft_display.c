@@ -6,84 +6,94 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 19:23:16 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/12/07 15:38:07 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/01/02 20:05:19 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-static void		ft_draw_line1(int x1, int y1, int x2, int y2, void *mlx, void *win)
+static void		ft_pixel_put(t_info *map, int x, int y)
 {
-	int		x;
+	if ((x <= map->window_x && x >= 0) && (y <= map->window_y && y >= 0))
+		mlx_pixel_put(map->mlx, map->window, x, y, map->color);
+}
 
-	x = x1;
-	while (x <= x2)
+static void		ft_draw_lines(t_info *map)
+{
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+	int		err2;
+
+	dx = abs(map->x2 - map->x1);
+	dy = -abs(map->y2 - map->y1);
+	sx = (map->x1 < map->x2) ? 1 : -1;
+	sy = (map->y1 < map->y2) ? 1 : -1;
+	err = dx + dy;
+	while (1)
 	{
-		mlx_pixel_put(mlx, win, x, y1 + ((y2 - y1) * (x - x1)) / (x2 - x1), 0xFF0000);
-		x++;
+		ft_pixel_put(map, map->x1, map->y1);
+		if (map->x1 == map->x2 && map->y1 == map->y2)
+			break ;
+		err2 = 2 * err;
+		if (err2 <= dx)
+		{
+			err += dx;
+			map->y1 += sy;
+		}
+		if (err2 >= dy)
+		{
+			err += dy;
+			map->x1 += sx;
+		}
 	}
 }
 
-static void		ft_draw_line2(int y1, int x1, int y2, int x2, void *mlx, void *win)
+static void		ft_iso(t_info *map, int x, int y, int x1, int y1)
 {
-	int		y;
-
-	y = y1;
-	while (y <= y2)
-	{
-		mlx_pixel_put(mlx, win, x1 + ((x2 - x1) * (y - y1)) / (y2 - y1), y, 0xFFFF00);
-		y++;
-	}
+	map->x1 = (x1 * map->padding + 50) + map->zoom * map->tab[y1][x1];
+	map->y1 = (y1 * map->padding + 50) + (map->zoom / 2) * map->tab[y1][x1];
+	map->x2 = (x * map->padding + 50) + map->zoom * map->tab[y][x];
+	map->y2 = (y * map->padding + 50) + (map->zoom / 2) * map->tab[y][x];
+	ft_pixel_put(map, map->x2, map->y2);
 }
 
-
-int		ft_display(int **tab, int line, int col)
+int		ft_draw(t_info *map)
 {
-	void	*mlx;
-	void	*win;
 	int		x;
 	int		y;
-	int		X;
-	int		Y;
-	int		k;
-	int		X2;
-	int		Y2;
 
-	x = 0;
 	y = 0;
-	k = 18;
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 700, 700, "CE dans le retro");
-	col = (&(*tab))[1] - *tab - 1;
-	while (y < line)
+	x = 0;
+	while (y < map->max_y)
 	{
 		x = 0;
-		while (x < col)
+		while (x < map->max_x)
 		{
-			X = x * 20 + 100 + (k * tab[y][x]);
-			Y = y * 20 + 100 + (k * tab[y][x]);
-			if (x < col - 1 && y < line - 1)
+			if (x < map->max_x && x > 0)
+				ft_iso(map, x, y, x - 1, y);
+				ft_draw_lines(map);
+			if (y < map->max_y && y > 0)
 			{
-				X2 = (x + 1) * 20 + 100 + (k * tab[y][x + 1]);
-				Y2 = y * 20 + 100 + (k * tab[y][x + 1]);
-	//			if ((tab[y][x] < tab[y][x + 1]) || (tab[y][x + 1] < tab[y][x]))
-	//				ft_draw_line1(X, Y, X2, Y2, mlx, win);
-	//			else
-					ft_draw_line1(X, Y, X2, Y2, mlx, win);
-			}
-			if (y < line - 1)
-			{
-				Y2 = (y + 1) * 20 + 100 + (k * tab[y + 1][x]);
-				X2 = x * 20 + 100 + (k * tab[y + 1][x]);
-		//		if ((tab[y][x] < tab[y + 1][x]) || (tab[y + 1][x] < tab[y][x]))
-		//			ft_draw_line2(Y, X, Y2, X2, mlx, win);
-		//		else
-					ft_draw_line2(Y, X, Y2, X2, mlx, win);
+				ft_iso(map, x, y, x, y - 1);
+				ft_draw_lines(map);
 			}
 			x++;
 		}
 		y++;
 	}
-	mlx_loop(mlx);
+	return (1);
+}
+
+int		ft_display(t_info *map)
+{
+
+	if (ft_init(map) == -1)
+		return (-1);
+	mlx_key_hook(map->window, ft_key_event, map);
+	mlx_expose_hook(map->window, ft_draw, map);
+	mlx_loop(map->mlx);
 	return (1);
 }

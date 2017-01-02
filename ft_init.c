@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_y.c                                         :+:      :+:    :+:   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 17:20:20 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/12/06 13:00:47 by jdesmare         ###   ########.fr       */
+/*   Created: 2016/12/30 10:37:21 by jdesmare          #+#    #+#             */
+/*   Updated: 2017/01/02 17:06:11 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-int		ft_get_y(int fd)
+int		ft_init(t_info *map)
 {
-	char	*line;
-	int		y;
-
-	y = 0;
-	while (get_next_line(fd, &line))
-	{
-		y++;
-		free(line);
-	}
-	return (y);
+	if (!(map->mlx = mlx_init()))
+		return (-1);
+	map->window = mlx_new_window(map->mlx, map->window_x, map->window_y , "fdf");
+	map->zoom = 30;
+	return (1);
 }

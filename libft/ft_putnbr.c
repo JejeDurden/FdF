@@ -6,29 +6,26 @@
 /*   By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 11:07:48 by jdesmare          #+#    #+#             */
-/*   Updated: 2016/11/04 11:24:03 by jdesmare         ###   ########.fr       */
+/*   Updated: 2016/12/29 19:45:48 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int n)
+void	ft_putnbr(long long int n)
 {
-	if (n == -2147483648)
-		ft_putstr("-2147483648");
-	if (n >= -2147483647 && n < 0)
+	if (n < -9223372036854775807)
+		ft_putstr("9223372036854775808");
+	if (n >= -9223372036854775807 && n < 0)
 	{
 		ft_putchar('-');
 		ft_putnbr(-n);
 	}
-	else if (n <= 2147483647 && n > 9)
+	else if (n <= 9223372036854775807 && n > 9)
 	{
 		ft_putnbr(n / 10);
 		ft_putnbr(n % 10);
 	}
-	else if (n <= 9)
-	{
-		if (n >= 0)
-			ft_putchar(n + '0');
-	}
+	else if (n <= 9 && n >= 0)
+		ft_putchar(n + '0');
 }
