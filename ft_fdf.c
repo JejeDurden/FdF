@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 15:47:03 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/02 19:17:59 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/01/03 07:39:31 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int		ft_fdf(t_info *map, char *file)
 		ft_putstr_fd("No data found.\n", 2);
 		return (-1);
 	}
-	ft_get_max(fd, map);
+	if (ft_get_max(fd, map) == -1)
+		return (-1);
 	if (close(fd) == -1)
 		ft_putstr_fd("Close failed\n", 2);
 	if ((fd = open(file, O_RDONLY)) == -1)

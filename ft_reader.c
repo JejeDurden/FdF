@@ -6,13 +6,13 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 16:03:09 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/02 16:46:58 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/01/03 07:56:39 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-int		**ft_reader( int **tab, int fd)
+int		**ft_reader(int **tab, int fd)
 {
 	char	*line;
 	char	**line_split;

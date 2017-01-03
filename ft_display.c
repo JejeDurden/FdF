@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 19:23:16 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/02 20:05:19 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/01/03 08:26:46 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,50 @@ static void		ft_pixel_put(t_info *map, int x, int y)
 		mlx_pixel_put(map->mlx, map->window, x, y, map->color);
 }
 
-static void		ft_draw_lines(t_info *map)
+static int		ft_draw_lines(t_info *map)
 {
-	int		dx;
-	int		dy;
-	int		sx;
-	int		sy;
-	int		err;
-	int		err2;
+	t_bres		*bres;
 
-	dx = abs(map->x2 - map->x1);
-	dy = -abs(map->y2 - map->y1);
-	sx = (map->x1 < map->x2) ? 1 : -1;
-	sy = (map->y1 < map->y2) ? 1 : -1;
-	err = dx + dy;
-	while (1)
+	if (!(bres = (t_bres *)malloc(sizeof(t_bres))))
+		return (-1);
+	bres->dx = abs(map->x2 - map->x1);
+	bres->dy = -abs(map->y2 - map->y1);
+	bres->sx = (map->x1 < map->x2) ? 1 : -1;
+	bres->sy = (map->y1 < map->y2) ? 1 : -1;
+	bres->err = bres->dx + bres->dy;
+	while (map->x1 != map->x2 || map->y1 != map->y2)
 	{
 		ft_pixel_put(map, map->x1, map->y1);
-		if (map->x1 == map->x2 && map->y1 == map->y2)
-			break ;
-		err2 = 2 * err;
-		if (err2 <= dx)
+		bres->err2 = 2 * bres->err;
+		if (bres->err2 <= bres->dx)
 		{
-			err += dx;
-			map->y1 += sy;
+			bres->err += bres->dx;
+			map->y1 += bres->sy;
 		}
-		if (err2 >= dy)
+		if (bres->err2 >= bres->dy)
 		{
-			err += dy;
-			map->x1 += sx;
+			bres->err += bres->dy;
+			map->x1 += bres->sx;
 		}
 	}
+	return (1);
 }
 
-static void		ft_iso(t_info *map, int x, int y, int x1, int y1)
+static void		ft_iso(t_info *map, int x, int y, int n)
 {
+	int		y1;
+	int		x1;
+
+	if (n == 0)
+	{
+		x1 = x - 1;
+		y1 = y;
+	}
+	if (n == 1)
+	{
+		x1 = x;
+		y1 = y - 1;
+	}
 	map->x1 = (x1 * map->padding + 50) + map->zoom * map->tab[y1][x1];
 	map->y1 = (y1 * map->padding + 50) + (map->zoom / 2) * map->tab[y1][x1];
 	map->x2 = (x * map->padding + 50) + map->zoom * map->tab[y][x];
@@ -60,7 +69,7 @@ static void		ft_iso(t_info *map, int x, int y, int x1, int y1)
 	ft_pixel_put(map, map->x2, map->y2);
 }
 
-int		ft_draw(t_info *map)
+int				ft_draw(t_info *map)
 {
 	int		x;
 	int		y;
@@ -73,13 +82,13 @@ int		ft_draw(t_info *map)
 		while (x < map->max_x)
 		{
 			if (x < map->max_x && x > 0)
-				ft_iso(map, x, y, x - 1, y);
-				ft_draw_lines(map);
+				ft_iso(map, x, y, 0);
+			if (ft_draw_lines(map) == -1)
+				return (-1);
 			if (y < map->max_y && y > 0)
-			{
-				ft_iso(map, x, y, x, y - 1);
-				ft_draw_lines(map);
-			}
+				ft_iso(map, x, y, 1);
+			if (ft_draw_lines(map) == -1)
+				return (-1);
 			x++;
 		}
 		y++;
@@ -87,9 +96,8 @@ int		ft_draw(t_info *map)
 	return (1);
 }
 
-int		ft_display(t_info *map)
+int				ft_display(t_info *map)
 {
-
 	if (ft_init(map) == -1)
 		return (-1);
 	mlx_key_hook(map->window, ft_key_event, map);

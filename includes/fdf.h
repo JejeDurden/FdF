@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 11:37:20 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/02 19:25:40 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/01/03 08:07:39 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,19 @@ typedef struct		s_info
 	int		padding;
 }					t_info;
 
+typedef struct		s_bres
+{
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+	int		err2;
+}					t_bres;
+
 int					ft_fdf(t_info *map, char *file);
 int					**ft_reader(int **tab, int fd);
-void				ft_get_max(int fd, t_info *map);
+int					ft_get_max(int fd, t_info *map);
 int					ft_display(t_info *map);
 int					ft_init(t_info *map);
 void				ft_padding(t_info *map);

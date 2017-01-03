@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 18:05:38 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/02 20:12:49 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/01/03 07:58:44 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_key_event(int keycode, t_info *map)
 	if (keycode == 69)
 		map->zoom++;
 	if (keycode == 78)
-		map->zoom --;
+		map->zoom--;
 	ft_expose_hook(map);
 	return (1);
 }
