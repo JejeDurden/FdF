@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 18:05:38 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/03 07:58:44 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/01/21 17:17:52 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,18 @@ int		ft_key_event(int keycode, t_info *map)
 	mlx_clear_window(map->mlx, map->window);
 	if (keycode == 53)
 		exit(0);
-	if (keycode == 11)
-		map->color = 0x0000FF;
-	if (keycode == 15)
-		map->color = 0xFF0000;
-	if (keycode == 5)
-		map->color = 0x00FF00;
 	if (keycode == 69)
-		map->zoom++;
+		map->height++;
 	if (keycode == 78)
-		map->zoom--;
+		map->height--;
+	if (keycode == 0)
+		map->padding--;
+	if (keycode == 6)
+		map->padding++;
+	if (keycode == 82)
+		map->proj = 0;
+	if (keycode == 83)
+		map->proj = 1;
 	ft_expose_hook(map);
 	return (1);
 }

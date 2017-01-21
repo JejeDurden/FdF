@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 11:37:20 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/03 08:31:15 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/01/21 17:07:46 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,23 @@ typedef struct		s_info
 {
 	void	*mlx;
 	void	*window;
+	void	*image;
+	char	*data;
 	int		window_x;
 	int		window_y;
 	int		max_x;
 	int		max_y;
-	int		color;
-	int		zoom;
+	int		height;
 	int		x1;
 	int		x2;
 	int		y1;
 	int		y2;
 	int		**tab;
 	int		padding;
+	int		blue;
+	int		green;
+	int		red;
+	int		proj;
 }					t_info;
 
 typedef struct		s_bres
@@ -61,5 +66,25 @@ void				ft_window_size(t_info *map);
 int					ft_key_event(int keycode, t_info *map);
 int					ft_draw(t_info *map);
 int					ft_expose_hook(t_info *map);
+void				ft_init_image(t_info *map);
+void				ft_destroy_image(t_info *map);
+void				ft_pixel_put(t_info *map, int x, int y);
+void				ft_black(t_info *map);
+void				ft_light_green(t_info *map);
+void				ft_light_blue(t_info *map);
+void				ft_pink(t_info *map);
+void				ft_white(t_info *map);
+void				ft_red(t_info *map);
+void				ft_blue(t_info *map);
+void				ft_orange(t_info *map);
+void				ft_yellow(t_info *map);
+void				ft_light_grey(t_info *map);
+void				ft_colors_0(t_info *map);
+void				ft_colors_1(t_info *map);
+void				ft_colors_2(t_info *map);
+void				ft_gradient_weird(t_info *map);
+void				ft_degradient_blue(t_info *map);
+void				ft_switch_proj(t_info *map, int x, int y, int n);
+
 
 #endif

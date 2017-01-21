@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_init_image.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 11:34:13 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/21 16:51:20 by jdesmare         ###   ########.fr       */
+/*   Created: 2017/01/04 11:39:47 by jdesmare          #+#    #+#             */
+/*   Updated: 2017/01/21 16:29:04 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-int		main(int argc, char **argv)
+void	ft_init_image(t_info *map)
 {
-	int		fd;
-	t_info	*map;
+	int		bpp;
+	int		sizeline;
+	int		endian;
 
-	fd = 0;
-	if (!(map = ft_memalloc(sizeof(t_info))))
-		return (-1);
-	if (argc != 2)
-	{
-		ft_putstr_fd("Usage : ./fdf <filename> [ case_size z_size ]\n", 2);
-		return (-1);
-	}
-	if (ft_fdf(map, argv[1]) == -1)
-	{
-		ft_putstr_fd("File error\n", 2);
-		return (-1);
-	}
-	if (close(fd) == -1)
-		ft_putstr_fd("Close failed\n", 2);
-	free(map);
-	return (1);
+	bpp = 32;
+	sizeline = map->window_x * 4;
+	endian = 0;
+	map->image = mlx_new_image(map->mlx, map->window_x, map->window_y);
+	map->data = mlx_get_data_addr(map->image, &bpp, &sizeline, &endian);
 }

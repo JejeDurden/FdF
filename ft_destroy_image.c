@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_destroy_image.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 11:34:13 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/21 16:51:20 by jdesmare         ###   ########.fr       */
+/*   Created: 2017/01/04 11:42:53 by jdesmare          #+#    #+#             */
+/*   Updated: 2017/01/21 16:44:53 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-int		main(int argc, char **argv)
+void	ft_destroy_image(t_info *map)
 {
-	int		fd;
-	t_info	*map;
-
-	fd = 0;
-	if (!(map = ft_memalloc(sizeof(t_info))))
-		return (-1);
-	if (argc != 2)
-	{
-		ft_putstr_fd("Usage : ./fdf <filename> [ case_size z_size ]\n", 2);
-		return (-1);
-	}
-	if (ft_fdf(map, argv[1]) == -1)
-	{
-		ft_putstr_fd("File error\n", 2);
-		return (-1);
-	}
-	if (close(fd) == -1)
-		ft_putstr_fd("Close failed\n", 2);
-	free(map);
-	return (1);
+	mlx_put_image_to_window(map->mlx, map->window, map->image, 0, 0);
+	mlx_destroy_image(map->mlx, map->image);
 }

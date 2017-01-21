@@ -6,7 +6,7 @@
 #    By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/11 10:38:56 by jdesmare          #+#    #+#              #
-#*   Updated: 2017/01/03 08:31:12 by jdesmare         ###   ########.fr       *#
+#*   Updated: 2017/01/21 17:18:25 by jdesmare         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,13 @@ SRC =	main.c						\
 		ft_window_size.c			\
 		ft_key_event.c				\
 		ft_expose_hook.c			\
+		ft_colors.c					\
+		ft_colors2.c				\
+		ft_colors3.c				\
+		ft_destroy_image.c			\
+		ft_init_image.c				\
+		ft_pixel_put.c				\
+		ft_switch_proj.c			\
 
 OBJ = $(SRC:.c=.o)
 

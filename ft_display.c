@@ -6,17 +6,11 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 19:23:16 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/03 08:26:46 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/01/21 19:21:17 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
-
-static void		ft_pixel_put(t_info *map, int x, int y)
-{
-	if ((x <= map->window_x && x >= 0) && (y <= map->window_y && y >= 0))
-		mlx_pixel_put(map->mlx, map->window, x, y, map->color);
-}
 
 static int		ft_draw_lines(t_info *map)
 {
@@ -52,21 +46,25 @@ static void		ft_iso(t_info *map, int x, int y, int n)
 	int		y1;
 	int		x1;
 
-	if (n == 0)
+	if (map->proj == 1)
 	{
-		x1 = x - 1;
-		y1 = y;
+		if (n == 0)
+		{
+			x1 = x - 1;
+			y1 = y;
+		}
+		if (n == 1)
+		{
+			x1 = x;
+			y1 = y - 1;
+		}
+		map->x1 = (x1 * map->padding + 100) + map->height * map->tab[y1][x1];
+		map->y1 = (y1 * map->padding + 100) + (map->height / 2) * map->tab[y1][x1];
+		map->x2 = (x * map->padding + 100) + map->height * map->tab[y][x];
+		map->y2 = (y * map->padding + 100) + (map->height / 2) * map->tab[y][x];
 	}
-	if (n == 1)
-	{
-		x1 = x;
-		y1 = y - 1;
-	}
-	map->x1 = (x1 * map->padding + 50) + map->zoom * map->tab[y1][x1];
-	map->y1 = (y1 * map->padding + 50) + (map->zoom / 2) * map->tab[y1][x1];
-	map->x2 = (x * map->padding + 50) + map->zoom * map->tab[y][x];
-	map->y2 = (y * map->padding + 50) + (map->zoom / 2) * map->tab[y][x];
-	ft_pixel_put(map, map->x2, map->y2);
+	else
+		ft_switch_proj(map, x, y, n);
 }
 
 int				ft_draw(t_info *map)
@@ -76,6 +74,7 @@ int				ft_draw(t_info *map)
 
 	y = 0;
 	x = 0;
+	ft_init_image(map);
 	while (y < map->max_y)
 	{
 		x = 0;
@@ -93,6 +92,7 @@ int				ft_draw(t_info *map)
 		}
 		y++;
 	}
+	ft_destroy_image(map);
 	return (1);
 }
 
