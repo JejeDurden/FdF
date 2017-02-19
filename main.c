@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 11:34:13 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/21 16:51:20 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/02/19 12:38:12 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int		main(int argc, char **argv)
 {
-	int		fd;
 	t_info	*map;
 
-	fd = 0;
 	if (!(map = ft_memalloc(sizeof(t_info))))
 		return (-1);
 	if (argc != 2)
@@ -30,8 +28,6 @@ int		main(int argc, char **argv)
 		ft_putstr_fd("File error\n", 2);
 		return (-1);
 	}
-	if (close(fd) == -1)
-		ft_putstr_fd("Close failed\n", 2);
 	free(map);
 	return (1);
 }

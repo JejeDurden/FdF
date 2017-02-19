@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 19:23:16 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/21 19:21:17 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/02/19 13:37:17 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ static void		ft_iso(t_info *map, int x, int y, int n)
 			y1 = y - 1;
 		}
 		map->x1 = (x1 * map->padding + 100) + map->height * map->tab[y1][x1];
-		map->y1 = (y1 * map->padding + 100) + (map->height / 2) * map->tab[y1][x1];
+		map->y1 = (y1 * map->padding + 100) + (map->height / 2) *
+			map->tab[y1][x1];
 		map->x2 = (x * map->padding + 100) + map->height * map->tab[y][x];
 		map->y2 = (y * map->padding + 100) + (map->height / 2) * map->tab[y][x];
 	}

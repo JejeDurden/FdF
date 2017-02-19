@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 17:20:20 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/03 07:38:36 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/02/19 12:40:27 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_get_max(int fd, t_info *map)
 
 	y = 0;
 	flag = 1;
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) > 0)
 	{
 		y++;
 		if (flag == 1)

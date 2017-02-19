@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 16:03:09 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/03 07:56:39 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/02/19 12:42:00 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		**ft_reader(int **tab, int fd)
 	int		j;
 
 	i = 0;
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) > 0)
 	{
 		j = 0;
 		line_split = ft_strsplit(line, ' ');

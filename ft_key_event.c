@@ -6,31 +6,45 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 18:05:38 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/21 17:17:52 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/02/19 13:28:23 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-int		ft_key_event(int keycode, t_info *map)
+static void		ft_move(int keycode, t_info *map)
+{
+	if (keycode == UP)
+		map->x1 -= 20;
+	if (keycode == DOWN)
+		map->x2 += 20;
+	if (keycode == LEFT)
+		ft_gradient_weird(map);
+	if (keycode == RIGHT)
+		ft_degradient_blue(map);
+}
+
+int				ft_key_event(int keycode, t_info *map)
 {
 	ft_putnbr(keycode);
 	ft_putchar('\n');
 	mlx_clear_window(map->mlx, map->window);
-	if (keycode == 53)
+	if (keycode == ECHAP)
 		exit(0);
-	if (keycode == 69)
+	if (keycode == PLUS)
 		map->height++;
-	if (keycode == 78)
+	if (keycode == MINUS)
 		map->height--;
-	if (keycode == 0)
+	if (keycode == A)
 		map->padding--;
-	if (keycode == 6)
+	if (keycode == Z)
 		map->padding++;
-	if (keycode == 82)
+	if (keycode == ZERO)
 		map->proj = 0;
-	if (keycode == 83)
+	if (keycode == ONE)
 		map->proj = 1;
+	if (keycode == UP || keycode == DOWN || keycode == LEFT || keycode == RIGHT)
+		ft_move(keycode, map);
 	ft_expose_hook(map);
 	return (1);
 }

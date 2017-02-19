@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 14:14:52 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/21 19:27:15 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/02/19 13:14:06 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void		ft_size_x(t_info *map)
 		x = 0;
 		while (x < map->max_x)
 		{
-			if (size < ((x * map->padding + 100) + map->height * map->tab[y][x]))
+			if (size < ((x * map->padding + 100) + map->height *
+						map->tab[y][x]))
 				size = (x * map->padding + 100) + map->height * map->tab[y][x];
 			x++;
 		}
@@ -53,7 +54,8 @@ void			ft_window_size(t_info *map)
 		x = 0;
 		while (x < map->max_x)
 		{
-			if (size < ((y * map->padding + 100) + map->height * map->tab[y][x]))
+			if (size < ((y * map->padding + 100) +
+						map->height * map->tab[y][x]))
 				size = (y * map->padding + 100) + map->height * map->tab[y][x];
 			x++;
 		}

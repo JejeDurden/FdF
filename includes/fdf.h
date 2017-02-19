@@ -6,7 +6,7 @@
 /*   By: jdesmare <jdesmare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 11:37:20 by jdesmare          #+#    #+#             */
-/*   Updated: 2017/01/21 17:07:46 by jdesmare         ###   ########.fr       */
+/*   Updated: 2017/02/19 13:33:56 by jdesmare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@
 # include "../libft/libft.h"
 # include "../libft/get_next_line.h"
 
+#define PLUS 69
+#define MINUS 78
+#define ZERO 82
+#define ONE 83
+#define A 0
+#define Z 6
+#define ECHAP 53
+#define R 15
+#define SPACE 49
+#define LEFT 123
+#define RIGHT 124
+#define UP 126
+#define DOWN 125
+
 typedef struct		s_info
 {
 	void	*mlx;
@@ -34,6 +48,8 @@ typedef struct		s_info
 	int		max_x;
 	int		max_y;
 	int		height;
+	int		x;
+	int		y;
 	int		x1;
 	int		x2;
 	int		y1;
@@ -84,6 +100,7 @@ void				ft_colors_1(t_info *map);
 void				ft_colors_2(t_info *map);
 void				ft_gradient_weird(t_info *map);
 void				ft_degradient_blue(t_info *map);
+void				ft_gradient_blue(t_info *map);
 void				ft_switch_proj(t_info *map, int x, int y, int n);
 
 

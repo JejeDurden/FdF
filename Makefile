@@ -6,7 +6,7 @@
 #    By: jdesmare <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/11 10:38:56 by jdesmare          #+#    #+#              #
-#*   Updated: 2017/01/21 17:18:25 by jdesmare         ###   ########.fr       *#
+#*   Updated: 2017/02/19 13:04:45 by jdesmare         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,12 +47,12 @@ $(NAME): $(OBJ)
 	@echo "$(NAME) created successfully"
 
 %.o: %.c
-	@$(CC) -o $@ -c $<
+	@$(CC) -I$(INCLUDES) -o $@ -c $<
 
 clean:
 	@make clean -C ./libft/
-	@echo "Erasing .o files..."
-	@rm -fv $(OBJ)
+	@echo "Erasing .o files in fdf..."
+	@rm -f $(OBJ)
 	@echo "Done."
 
 fclean: clean
